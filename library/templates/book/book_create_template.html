@@ -1,0 +1,14 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="object-form">
+        <form method="post" class="content_form book book-create">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="buttons">
+                <input type="submit"
+                       value="Create"
+                       class="button button-create">
+            </div>
+        </form>
+    </div>
+{% endblock %}

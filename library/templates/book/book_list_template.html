@@ -1,0 +1,25 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="object-title">
+        <h1 class="object-title">
+            Books
+        </h1>
+    </div>
+    <div class="object-list">
+        <ul>
+            {% for object in object_list %}
+                <li class="object-list">
+                    <p class="object-list object-title">
+                        <a class = "object-list"
+                           href="{% url 'library:book-detail' pk=object.pk %}">
+                            {{ object.title }}
+                        </a>
+                    </p>
+                    <p class="object-list object-subtitle">
+                        {{ object.author }}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

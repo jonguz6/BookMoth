@@ -1,0 +1,32 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="object-detail">
+        <h1 class="object-detail object-title">{{ object.title }}</h1>
+        <h2 class="object_detail object-author">{{ object.author }}</h2>
+        <ul>
+            <li>
+                <h3 class="object-detail object-info">{{ object.isbn_13 }}</h3>
+            </li>
+            <li>
+                <h3 class="object-detail object-info">{{ object.edition }}</h3>
+            </li>
+            <li>
+                <h3 class="object-detail object-info">
+                    {{ object.get_binding_display }}
+                </h3>
+            </li>
+            <li>
+                <h3 class="object-detail object-info">{{ object.publisher }}</h3>
+            </li>
+            <li>
+                <h3 class="object-detail object-info">{{ object.published }}</h3>
+            </li>
+        </ul>
+        <div class="object-price">
+            <h4 class="object-price">
+                {{ object.list_price }}
+            </h4>
+        </div>
+    </div>
+    </div>
+{% endblock %}
