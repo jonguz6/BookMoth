@@ -1,13 +1,23 @@
 body {
     background-color: rgba(255, 220, 255,0.5);
+    font-family: "Source Code Pro", "sans-serif";
+}
+
+div.navbar {
+    display:flex;
+    max-height: 3rem;
+    background-color: indianred ;
+}
+
+div.navbar * {
+    flex: 1 1 auto;
 }
 
 :is(h1, h2, h3, ul) {
     font-weight: bold;
 }
 
-h1.class-name {
-    text-align: left;
+h
 }
 
 h2 {
@@ -19,6 +29,7 @@ div.content {
     margin: auto;
     display: flex;
     flex-direction: column;
+    background-color: white;
 }
 
 div.content > *:not(h3, ul),
@@ -27,18 +38,12 @@ div.content :is(div.button) {
     padding: 1rem 2rem;
 }
 
-div.jumbotron {
-    margin: 4em auto;
-    max-width: 40em;
-    background-color: rgba(255, 250, 255, 1);
-    border-radius: 0.25rem;
-}
 
-div.button {
+div.buttons {
     display: flex;
 }
 
-div.button * {
+div.buttons * {
     flex: 0 0 auto;
 }
 
@@ -49,10 +54,6 @@ input.button {
     border-radius: 0.25rem;
 }
 
-a.nav-link {
-    border: 0.125rem dotted white;
-    text-align: center;
-}
 
 .button-delete {
     background-color: darkred;
