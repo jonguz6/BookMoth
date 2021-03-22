@@ -1,0 +1,67 @@
+body {
+    background-color: rgba(255, 220, 255,0.5);
+}
+
+:is(h1, h2, h3, ul) {
+    font-weight: bold;
+}
+
+h1.class-name {
+    text-align: left;
+}
+
+h2 {
+    text-align: right;
+}
+
+div.content {
+    max-width: 40em;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+div.content > *:not(h3, ul),
+div.content :is(div.button) {
+    margin:auto;
+    padding: 1rem 2rem;
+}
+
+div.jumbotron {
+    margin: 4em auto;
+    max-width: 40em;
+    background-color: rgba(255, 250, 255, 1);
+    border-radius: 0.25rem;
+}
+
+div.button {
+    display: flex;
+}
+
+div.button * {
+    flex: 0 0 auto;
+}
+
+input.button {
+    margin: auto;
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 0.25rem;
+}
+
+a.nav-link {
+    border: 0.125rem dotted white;
+    text-align: center;
+}
+
+.button-delete {
+    background-color: darkred;
+}
+
+.button-create {
+    background-color: dodgerblue;
+}
+
+.button-update {
+    background-color: darkgreen;
+}
