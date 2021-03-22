@@ -27,9 +27,15 @@ h2 {
 div.content {
     max-width: 40em;
     margin: auto;
-    display: flex;
-    flex-direction: column;
     background-color: white;
+}
+
+div.flex {
+    display: flex;
+}
+
+div.column{
+    flex-direction: column;
 }
 
 div.content > *:not(h3, ul),
