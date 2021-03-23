@@ -37,5 +37,5 @@ class BookDeleteView(views.DeleteView):
 
 def index(request):
     return render(
-        request, template_name="book_base.html"
+        request, template_name="book/book_index.html"
     )
