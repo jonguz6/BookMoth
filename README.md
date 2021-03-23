@@ -6,11 +6,14 @@ I'm creating this project to show and test my skill with Django, hopefully leadi
 
 # Goal
 The goal of this project is to create a working library with the following features:
+
 Working features:
 - Storing information about books
+
 Work in progress features:
 - Book Inventory
 - Form validations
+
 Planned features:
 - Online Library
 - Online store
@@ -22,4 +25,5 @@ If you have any feature suggestions, please let me know!
 This project uses:
 - Django
 - Django ORM
+
 and soon, more!
