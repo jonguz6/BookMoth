@@ -26,4 +26,6 @@ This project uses:
 - Django
 - Django ORM
 
+- PostgreSQL
+
 and soon, more!
