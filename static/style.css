@@ -10,14 +10,20 @@ div.navbar {
 }
 
 div.navbar * {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
 }
 
+div.footer {
+    display: inherit;
+    position: absolute;
+
+}
 :is(h1, h2, h3, ul) {
     font-weight: bold;
 }
 
-h
+h1 {
+    text-align: left;
 }
 
 h2 {
@@ -25,7 +31,8 @@ h2 {
 }
 
 div.content {
-    max-width: 40em;
+    max-width: 100em;
+    width: auto;
     margin: auto;
     background-color: white;
 }
@@ -58,6 +65,24 @@ input.button {
     border: none;
     padding: 0.5rem 2rem;
     border-radius: 0.25rem;
+}
+
+div.object-image {
+    margin: auto;
+    padding: 2rem;
+    min-width: 0;
+    height: auto;
+}
+
+img.object-image {
+    min-width: 0;
+    max-width: 30rem;
+    height: auto;
+    align-self: flex-start;
+}
+
+div.object-detail {
+    padding: 0.5rem 2rem;
 }
 
 

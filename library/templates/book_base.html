@@ -9,9 +9,7 @@
           href="{% static 'favicon.ico' %}">
 </head>
 <body>
-<nav>
     {% include 'navbar.html' %}
-</nav>
 <main>
     <div class="content flex column">
         {% block content %}
@@ -19,8 +17,6 @@
     </div>
 
 </main>
-<footer>
-    <h2>Footer</h2>
-</footer>
+{% include 'footer.html' %}
 </body>
 </html>
