@@ -8,14 +8,15 @@ class Book(models.Model):
         ('E', "E-Book")
     ]
 
-    isbn_13 = models.CharField(max_length=13)
+    isbn_13 = models.CharField(max_length=13, verbose_name="ISBN")
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
     edition = models.CharField(max_length=20)
     binding = models.CharField(max_length=2, choices=BINDING_CHOICES)
     publisher = models.CharField(max_length=50)
     published = models.DateField()
+    picture = models.ImageField(null=True, blank=True)
     list_price = models.FloatField()
 
     def __str__(self):
-        return f"'{self.title}' by {self.author} ({self.published}"
+        return f"'{self.title}' by {self.author} ({self.published})"
