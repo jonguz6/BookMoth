@@ -20,3 +20,13 @@ class Book(models.Model):
 
     def __str__(self):
         return f"'{self.title}' by {self.author} ({self.published})"
+
+
+class Inventory(models.Model):
+    book = models.OneToOneField(Book,
+                                on_delete=models.CASCADE,
+                                related_name="inventory")
+    amount_stored = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.book.title} Inventory: {self.amount_stored}"

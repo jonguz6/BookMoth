@@ -10,6 +10,24 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+h1 {
+    text-align: left;
+    padding: .5rem 0;
+}
+
+h2 {
+    text-align: right;
+}
+
+li.object-list {
+    padding: 0.5rem 0;
+}
+
 a {
     text-decoration: none;
     color: red;
@@ -45,18 +63,6 @@ main {
     flex-shrink: 0;
     padding: .5rem 1rem;
 
-}
-h1, h2, h3 {
-    font-weight: bold;
-}
-
-h1 {
-    text-align: left;
-    padding: .5rem 0;
-}
-
-h2 {
-    text-align: right;
 }
 
 div.content {

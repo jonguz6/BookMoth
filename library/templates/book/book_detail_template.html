@@ -35,22 +35,38 @@
                             {{ object.published | date:'M Y' }}
                         </span>
                     </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Inventory:</span>
+                        <span class="object-detail object-info">
+                            {{ object.inventory.amount_stored }}
+                        </span>
+                    </li>
                 </ul>
                 <div class="object-price">
-                    <h3 class="object-price">
+                    <span class="object-price object-descriptor">
                         List price:
+                    </span>
+                    <span class="object-price object-info">
                         {{ object.list_price }}
-                    </h3>
+                    </span>
                 </div>
             </div>
         </div>
         <div class="buttons">
-            <input type="button" class="button button-create" value="Update"
+            <input type="button"
+                   class="button button-update"
+                   value="Update"
                    onclick="location.href=
                            '{% url 'library:book-update' pk=object.pk %}'">
             <input type="button" class="button button-delete" value="Delete"
                    onclick="location.href=
                            '{% url 'library:book-delete' pk=object.pk %}'">
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-update"
+                   value="Update Inventory"
+                   onclick="location.href='{% url 'library:inventory-update' pk=object.inventory.pk %}'">
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content flex column">
+        <div class="object-title">
+            <h1 class="object-title">
+                Inventories
+            </h1>
+        </div>
+        <div class="object-list">
+            <ul>
+                {% for object in object_list %}
+                    <li class="object-list">
+                        <p class="object-list object-title">
+                            <a class="object-list"
+                               href="{% url 'library:inventory-detail' pk=object.pk %}">
+                                {{ object.book.title}}
+                            </a>
+                            {{ object.amount_stored }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="buttons">
+            <input type="button" class="button button-create" value="Create New"
+                   onclick="location.href='{% url 'library:inventory-create' %}'">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content">
+        <div class="object-detail flex column">
+            <div class="object-detail object-title">
+                <p class="object-detail object-descriptor">
+                    Inventory of
+                </p>
+                <p class="object-detail object-info">
+                    <a href="{% url 'library:book-detail' pk=object.book.pk %}">
+                        {{ object.book.title }}
+                    </a>
+                </p>
+            </div>
+            <div class="object-detail object-inventory_amount">
+                <p>{{ object.amount_stored}} in inventory</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <input type="button" class="button button-create" value="Update"
+                   onclick="location.href=
+                           '{% url 'library:inventory-update' pk=object.pk %}'">
+            <input type="button" class="button button-delete" value="Delete"
+                   onclick="location.href=
+                           '{% url 'library:inventory-delete' pk=object.pk %}'">
+        </div>
+    </div>
+{% endblock %}
