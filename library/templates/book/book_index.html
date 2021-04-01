@@ -1,4 +1,6 @@
-{%  extends 'book_base.html' %}
-{% block content%}
-<a href="{% url 'library:book-list' %}" class="link main-site">Books</a>
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content flex column">
+        <a href="{% url 'library:book-list' %}" class="link main-site">Books</a>
+    </div>
 {% endblock %}

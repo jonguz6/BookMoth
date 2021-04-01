@@ -1,50 +1,56 @@
 {% extends 'book_base.html' %}
 {% block content %}
-    <div class="object-detail flex ">
-        <div class="object-image flex">
-            <img class="object-image" src="/static/{{ object.picture.url }}" alt="{{ object.title }} book cover">
-        </div>
-        <div class="object-detail flex column">
-            <h1 class="object-detail object-title">{{ object.title }}</h1>
-            <h2 class="object_detail object-author">{{ object.author }}</h2>
-            <ul>
-                <li>
-                    <span class="object-detail object-descriptor">ISBN: </span>
-                    <span class="object-detail object-info">{{ object.isbn_13 }}</span>
-                </li>
-                <li>
-                    <span class="object-detail object-descriptor">Edition: </span>
-                    <span class="object-detail object-info">{{ object.edition }}</span>
-                </li>
-                <li>
-                    <span class="object-detail object-descriptor">Binding: </span>
-                    <span class="object-detail object-info">
-                        {{ object.get_binding_display }}
-                    </span>
-                </li>
-                <li>
-                    <span class="object-detail object-descriptor">Publisher:</span>
-                    <span class="object-detail object-info">{{ object.publisher }}</span>
-                </li>
-                <li>
-                    <span class="object-detail object-descriptor">Date published:
-                    <span class="object-detail object-info">{{ object.published }}</span>
-                </li>
-            </ul>
-            <div class="object-price">
-                <h3 class="object-price">
-                    List price:
-                    {{ object.list_price }}
-                </h3>
+    <div class="content">
+        <div class="object-detail flex">
+            {% if object.picture.url != '' %}
+                <div class="object-image">
+                    <img class="object-image" src="/static/{{ object.picture.url }}" alt="{{ object.title }} book cover">
+                </div>
+            {% endif %}
+            <div class="object-detail flex column">
+                <h1 class="object-detail object-title">{{ object.title }}</h1>
+                <h2 class="object_detail object-author">{{ object.author }}</h2>
+                <ul>
+                    <li>
+                        <span class="object-detail object-descriptor">ISBN: </span>
+                        <span class="object-detail object-info">{{ object.isbn_13 }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Edition: </span>
+                        <span class="object-detail object-info">{{ object.edition }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Binding: </span>
+                        <span class="object-detail object-info">
+                            {{ object.get_binding_display }}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Publisher:</span>
+                        <span class="object-detail object-info">{{ object.publisher }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Date published:</span>
+                        <span class="object-detail object-info">
+                            {{ object.published | date:'M Y' }}
+                        </span>
+                    </li>
+                </ul>
+                <div class="object-price">
+                    <h3 class="object-price">
+                        List price:
+                        {{ object.list_price }}
+                    </h3>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="buttons">
-        <input type="button" class="button button-create" value="Update"
-               onclick="location.href=
-                       '{% url 'library:book-update' pk=object.pk %}'">
-        <input type="button" class="button button-delete" value="Delete"
-               onclick="location.href=
-                       '{% url 'library:book-delete' pk=object.pk %}'">
+        <div class="buttons">
+            <input type="button" class="button button-create" value="Update"
+                   onclick="location.href=
+                           '{% url 'library:book-update' pk=object.pk %}'">
+            <input type="button" class="button button-delete" value="Delete"
+                   onclick="location.href=
+                           '{% url 'library:book-delete' pk=object.pk %}'">
+        </div>
     </div>
 {% endblock %}
