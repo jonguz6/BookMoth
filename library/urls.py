@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 
 from library import views
@@ -21,3 +23,4 @@ urlpatterns = [
         'book-delete/<pk>', views.BookDeleteView.as_view(), name="book-delete"
     ),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
