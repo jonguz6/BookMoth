@@ -2,13 +2,13 @@ from django.shortcuts import render
 import django.views.generic as views
 from django.urls import reverse_lazy
 
-from library import models
+from library import models, forms
 
 
 class BookCreateView(views.CreateView):
     model = models.Book
     template_name = "book/book_create_template.html"
-    fields = "__all__"
+    form_class = forms.BookForm
     success_url = reverse_lazy("library:book-list")
 
 

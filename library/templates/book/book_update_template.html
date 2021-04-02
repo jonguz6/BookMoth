@@ -1,14 +1,16 @@
 {% extends 'book_base.html' %}
 {% block content %}
-    <div class="object-form">
-        <form method="post" class="content_form book book-update">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="buttons">
-                <input type="submit"
-                       value="Update"
-                       class="button button-update">
-            </div>
-        </form>
+    <div class="content flex column">
+        <div class="object-form">
+            <form method="post" enctype="multipart/form-data" class="content_form book book-update">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="buttons">
+                    <input type="submit"
+                           value="Update"
+                           class="button button-update">
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
