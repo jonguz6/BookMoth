@@ -25,7 +25,9 @@ If you have any feature suggestions, please let me know!
 This project uses:
 - Django
 - Django ORM
-
 - PostgreSQL
+- HTML
+- CSS
+
 
 and soon, more!
