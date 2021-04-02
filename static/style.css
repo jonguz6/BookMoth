@@ -1,56 +1,112 @@
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: rgba(255, 220, 255,0.5);
-    font-family: "Source Code Pro", "sans-serif";
+    font-family: "ff-tisa-sans-web-pro", "sans-serif";
+    font-weight: 500;
+    font-size: large;
+    display: flex;
+    flex-direction: column;
 }
 
-div.navbar {
-    display:flex;
-    max-height: 3rem;
-    background-color: indianred ;
-}
-
-div.navbar * {
-    flex: 1 1 auto;
-}
-
-:is(h1, h2, h3, ul) {
+h1, h2, h3 {
     font-weight: bold;
 }
 
-h
+h1 {
+    text-align: left;
+    padding: .5rem 0;
 }
 
 h2 {
     text-align: right;
 }
 
+li.object-list {
+    padding: 0.5rem 0;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+}
+
+a.navbar, a.footer {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+.navbar {
+    display:flex;
+    max-height: 6rem;
+    background-color: indianred ;
+}
+
+.navbar * {
+    flex: 0 1 auto;
+    padding: 1rem;
+    font-weight: 700;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    background-color: darkred;
+    flex-shrink: 0;
+    padding: .5rem 1rem;
+
+}
+
 div.content {
-    max-width: 40em;
     margin: auto;
     background-color: white;
+    max-width: 40rem;
+    padding: 1rem;
 }
 
 div.flex {
     display: flex;
 }
 
-div.column{
+div.column {
     flex-direction: column;
 }
 
+div.object-detail {
+    flex-wrap: wrap;
+    max-width: fit-content;
+    padding: 0.5rem;
+    flex: 1 0 auto;
+    margin: auto;
+}
+
+div.object-detail * {
+    width: inherit;
+}
+
 div.content > *:not(h3, ul),
-div.content :is(div.button) {
-    margin:auto;
+div.content div.buttons {
+    /*margin:auto;*/
     padding: 1rem 2rem;
 }
 
 
 div.buttons {
     display: flex;
+    margin:1rem auto;
+    width: fit-content;
 }
 
 div.buttons * {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
 }
 
 input.button {
@@ -60,6 +116,21 @@ input.button {
     border-radius: 0.25rem;
 }
 
+div.object-image {
+    margin: auto;
+    max-width: 50rem;
+    flex: 0 1 auto;
+}
+
+img.object-image {
+    margin: auto;
+    min-width: 0;
+    width: 100%;
+}
+
+.object-subtitle {
+    padding: 0.5rem 0;
+}
 
 .button-delete {
     background-color: darkred;
