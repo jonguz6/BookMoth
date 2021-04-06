@@ -14,6 +14,7 @@ from pathlib import Path
 
 from dj_database_url import parse as db_url
 from decouple import config
+import django_secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,15 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = str(django_secrets.SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(django_secrets.DEBUG)
 
-ALLOWED_HOSTS = [
-    'testserver',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = django_secrets.ALLOWED_HOSTS
 
 
 # Application definition
@@ -43,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'library',
-    'betterforms',
+    'renting',
+
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -62,8 +63,8 @@ ROOT_URLCONF = 'LibraryProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,16 +83,7 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'library_db',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+DATABASES = django_secrets.DATABASES
 
 
 # Password validation
@@ -130,10 +122,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATIC_URL = 'https://library-project-bucket.s3.eu-central-1.amazonaws.com/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 MEDIA_URL = '/images/'
+
+AWS_ACCESS_KEY_ID = django_secrets.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = django_secrets.AWS_SECRET_ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = django_secrets.AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_HOST = "s3.eu-central-1.amazonaws.com"
+AWS_S3_REGION_NAME = "eu-central-1"
+AWS_S3_ADDRESSING_STYLE = "virtual"
