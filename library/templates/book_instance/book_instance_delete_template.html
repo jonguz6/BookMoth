@@ -1,0 +1,25 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content flex column">
+        <div class="title">
+            <h1 class="title">
+                Remove Book Instance
+            </h1>
+            <h2 class="subtitle">
+                {{ bookinstance.book.title }}
+                {{ bookinstance.unique_id }}
+            </h2>
+        </div>
+        <div class="object-form">
+            <form method="post" enctype="multipart/form-data" class="content_form book book-delete">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="buttons">
+                    <input type="submit"
+                           value="Delete"
+                           class="button button-delete">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

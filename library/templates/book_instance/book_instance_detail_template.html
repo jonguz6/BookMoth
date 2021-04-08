@@ -1,0 +1,80 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content">
+        <div class="object-detail flex">
+            {% if object.book.picture.url != '' %}
+                <div class="object-image">
+                    <img class="object-image" src="/static/{{ object.book.picture.url }}"
+                         alt="{{ object.book.title }} book cover">
+                </div>
+            {% endif %}
+            <div class="object-detail flex column">
+                <h1 class="object-detail object-title">{{ object.book.title }}</h1>
+                <h2 class="object_detail object-author">{{ object.book.author }}</h2>
+                <ul>
+                    <li>
+                        <span class="object-detail object-descriptor">ISBN: </span>
+                        <span class="object-detail object-info">{{ object.book.isbn_13 }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Short Title:</span>
+                        <span class="object-detail object-info">{{ object.book.title_short }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Edition: </span>
+                        <span class="object-detail object-info">{{ object.book.edition }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Binding: </span>
+                        <span class="object-detail object-info">
+                            {{ object.book.get_binding_display }}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Publisher:</span>
+                        <span class="object-detail object-info">{{ object.book.publisher }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Date published:</span>
+                        <span class="object-detail object-info">
+                            {{ object.book.published | date:'M Y' }}
+                        </span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Available:</span>
+                        <span class="object-detail object-info">
+                            {{ object.book.not_rented }} / {{ object.book.amount_stored }}
+                        </span>
+                    </li>
+                </ul>
+                <div class="object-price">
+                    <span class="object-price object-descriptor">
+                        List price:
+                    </span>
+                    <span class="object-price object-info">
+                        {{ object.book.list_price }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="object-detail">
+            <p>{{ object.unique_id }}</p>
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-update"
+                   value="Update"
+                   onclick="location.href=
+                           '{% url 'library:book-instance-update' pk=object.pk %}'">
+            <input type="button" class="button button-delete" value="Delete"
+                   onclick="location.href=
+                           '{% url 'library:book-instance-delete' pk=object.pk %}'">
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-create"
+                   value="Rent"
+                   onclick="location.href='{% url 'renting:rental-create' book=object.book.pk %}'">
+        </div>
+    </div>
+{% endblock %}

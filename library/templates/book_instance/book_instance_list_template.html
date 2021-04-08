@@ -1,0 +1,31 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content flex column">
+        <div class="object-title">
+            <h1 class="object-title">
+                Instances
+            </h1>
+        </div>
+        <div class="object-list">
+            <ul>
+                {% for object in object_list %}
+                    <li class="object-list">
+                        <p class="object-list object-title">
+                            <a class="object-list"
+                               href="{% url 'library:book-instance-detail' pk=object.pk %}">
+                                {{ object.book.title_short }}
+                            </a>
+                        </p>
+                        <p class="object-list object-subtitle">
+                            {{ object.unique_id }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="buttons">
+            <input type="button" class="button button-create" value="Create New Instance"
+                   onclick="location.href='{% url 'library:book-instance-create-empty' %}'">
+        </div>
+    </div>
+{% endblock %}
