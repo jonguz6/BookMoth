@@ -15,6 +15,7 @@ Work in progress features:
 - Online Library
 
 Planned features:
+- AWS Live Demo
 - Online store
 - E-commerce suppport
 
