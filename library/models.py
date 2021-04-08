@@ -1,4 +1,8 @@
+import re
+import uuid
+
 from django.db import models
+from django.db.models import Q
 
 
 class Book(models.Model):
@@ -18,15 +22,33 @@ class Book(models.Model):
     picture = models.ImageField(null=True, blank=True)
     list_price = models.FloatField()
 
+    @property
+    def amount_stored(self):
+        return self.instance.count()
+
+    @property
+    def not_rented(self):
+        amount_rented = self.instance.filter(Q(status='O') | Q(status='R'), book=self).count()
+        return self.amount_stored - amount_rented
+
+    @property
+    def title_short(self):
+        return re.split(':', self.title)[0]
+
     def __str__(self):
-        return f"'{self.title}' by {self.author} ({self.published})"
+        return self.title_short
 
 
-class Inventory(models.Model):
-    book = models.OneToOneField(Book,
-                                on_delete=models.CASCADE,
-                                related_name="inventory")
-    amount_stored = models.IntegerField(default=0)
+class BookInstance(models.Model):
+    STATUS_CHOICES = [
+        ('M', 'Maintenance'),
+        ('L', 'On Loan'),
+        ('A', 'Available'),
+        ('R', 'Reserved'),
+    ]
+    unique_id = models.UUIDField(unique=True, default=uuid.uuid4)
+    book = models.ForeignKey(Book, on_delete=models.RESTRICT, related_name='instance')
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='m')
 
     def __str__(self):
-        return f"{self.book.title} Inventory: {self.amount_stored}"
+        return f"{self.unique_id} - {self.book.title_short}"

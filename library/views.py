@@ -35,36 +35,6 @@ class BookDeleteView(views.DeleteView):
     success_url = reverse_lazy("library:book-list")
 
 
-class InventoryCreateView(views.CreateView):
-    model = models.Inventory
-    template_name = "inventory/inventory_create_template.html"
-    form_class = forms.InventoryForm
-    success_url = reverse_lazy("library:inventory-list")
-
-
-class InventoryListView(views.ListView):
-    model = models.Inventory
-    template_name = "inventory/inventory_list_template.html"
-
-
-class InventoryDetailView(views.DetailView):
-    model = models.Inventory
-    template_name = "inventory/inventory_detail_template.html"
-
-
-class InventoryUpdateView(views.UpdateView):
-    model = models.Inventory
-    template_name = "inventory/inventory_update_template.html"
-    form_class = forms.InventoryForm
-    success_url = reverse_lazy("library:inventory-list")
-
-
-class InventoryDeleteView(views.DeleteView):
-    model = models.Inventory
-    template_name = "inventory/inventory_delete_template.html"
-    success_url = reverse_lazy("library:inventory-list")
-
-
 def index(request):
     return render(
         request, template_name="book/book_index.html"

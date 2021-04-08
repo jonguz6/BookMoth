@@ -22,21 +22,5 @@ urlpatterns = [
     path(
         'book-delete/<pk>', views.BookDeleteView.as_view(), name="book-delete"
     ),
-    
-    path(
-        'inventory-create/', views.InventoryCreateView.as_view(), name="inventory-create"
-    ),
-    path(
-        'inventory-list/', views.InventoryListView.as_view(), name="inventory-list"
-    ),
-    path(
-        'inventory-detail/<pk>', views.InventoryDetailView.as_view(), name="inventory-detail"
-    ),
-    path(
-        'inventory-update/<pk>', views.InventoryUpdateView.as_view(), name="inventory-update"
-    ),
-    path(
-        'inventory-delete/<pk>', views.InventoryDeleteView.as_view(), name="inventory-delete"
-    ),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

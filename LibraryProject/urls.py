@@ -22,4 +22,5 @@ urlpatterns = [
     path('', project_views.index),
     path('admin/', admin.site.urls),
     path('library/', include('library.urls')),
+    path('renting/', include('renting.urls')),
 ]

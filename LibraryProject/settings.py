@@ -28,10 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'testserver',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'library',
-    'betterforms',
+    'library.apps.LibraryConfig',
+    'renting.apps.RentingConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +82,7 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'library_db',
+        'NAME': 'library_db2',
         'USER': 'myuser',
         'PASSWORD': 'mypassword',
         'HOST': 'localhost',
