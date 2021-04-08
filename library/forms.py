@@ -4,7 +4,7 @@ import pytz
 from django import forms
 from django.core.exceptions import ValidationError
 
-from library.models import Book
+from library.models import Book, BookInstance
 
 UTC = pytz.UTC
 
@@ -29,3 +29,10 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = "__all__"
+
+
+class BookInstanceForm(forms.ModelForm):
+
+    class Meta:
+        model = BookInstance
+        fields = ('book', 'status')

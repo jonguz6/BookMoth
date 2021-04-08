@@ -9,10 +9,10 @@ class Book(models.Model):
     BINDING_CHOICES = [
         ('P', 'Paperback'),
         ('H', 'Hardcover'),
-        ('E', "E-Book")
+        ('E', 'E-Book')
     ]
 
-    isbn_13 = models.CharField(max_length=13, verbose_name="ISBN")
+    isbn_13 = models.CharField(max_length=13, verbose_name='ISBN')
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
     edition = models.CharField(max_length=20)
@@ -24,7 +24,7 @@ class Book(models.Model):
 
     @property
     def amount_stored(self):
-        return self.instance.count()
+        return self.instance.exclude(status='M').count()
 
     @property
     def not_rented(self):

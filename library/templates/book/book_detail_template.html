@@ -70,6 +70,13 @@
         <div class="buttons">
             <input type="button"
                    class="button button-create"
+                   value="Create New Instance"
+                   onclick="location.href=
+                           '{% url 'library:book-instance-create' book_id=object.id %}'">
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-create"
                    value="Rent"
                    onclick="location.href='{% url 'renting:rental-create' book=object.pk %}'">
         </div>
