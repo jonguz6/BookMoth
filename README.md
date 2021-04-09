@@ -9,13 +9,13 @@ The goal of this project is to create a working library with the following featu
 
 Working features:
 - Storing information about books
+- Book Inventory
 
 Work in progress features:
-- Book Inventory
-- Form validations
+- Online Library
 
 Planned features:
-- Online Library
+- AWS Live Demo
 - Online store
 - E-commerce suppport
 
