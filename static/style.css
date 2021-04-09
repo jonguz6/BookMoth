@@ -82,7 +82,14 @@ div.column {
 
 div.object-detail {
     flex-wrap: wrap;
-    max-width: inherit;
+    max-width: fit-content;
+    padding: 0.5rem;
+    flex: 1 0 auto;
+    margin: auto;
+}
+
+div.object-detail * {
+    width: inherit;
 }
 
 div.content > *:not(h3, ul),
@@ -119,10 +126,6 @@ img.object-image {
     margin: auto;
     min-width: 0;
     width: 100%;
-}
-
-div.object-detail {
-    padding: 0.5rem;
 }
 
 .object-subtitle {
