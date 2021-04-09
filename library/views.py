@@ -44,7 +44,6 @@ class BookInstanceCreateView(views.CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         book = self.kwargs.get('book_id')
-        print(book)
         if book is None:
             return kwargs
         kwargs['initial'] = {'book': models.BookInstance.objects.get(id=book)}

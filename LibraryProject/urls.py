@@ -19,7 +19,8 @@ from django.urls import path, include
 from LibraryProject import views as project_views
 
 urlpatterns = [
-    path('', project_views.index),
+    path('', project_views.index, name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('library/', include('library.urls')),
     path('renting/', include('renting.urls')),

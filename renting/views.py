@@ -28,7 +28,7 @@ class LockedRentalCreateView(LoginRequiredMixin, views.CreateView):
         user = self.request.user
         if book is None:
             return kwargs
-        kwargs['initial'] = {'book': BookInstance.objects.get(book=book, status='A'),
+        kwargs['initial'] = {'book': BookInstance.objects.filter(book=book, status='A').first(),
                              'profile': models.Profile.objects.get(user=user)}
         return kwargs
 
@@ -36,7 +36,7 @@ class LockedRentalCreateView(LoginRequiredMixin, views.CreateView):
         book = kwargs.get('book_id')
         print(book)
         try:
-            BookInstance.objects.get(book=book, status='A')
+            BookInstance.objects.filter(book=book, status='A').first()
         except BookInstance.DoesNotExist:
             messages.error(request, 'No books available!')
             return redirect(request.META['HTTP_REFERER'])
