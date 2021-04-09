@@ -1,23 +1,22 @@
-from datetime import datetime
+from datetime import date
 
 import pytz
 from django import forms
 from betterforms.multiform import MultiModelForm
 from django.core.exceptions import ValidationError
 
-from library.models import Book, Inventory
+from library.models import Book, BookInstance
 
 UTC = pytz.UTC
 
 
 class PastDateField(forms.DateField):
-    pass
-    # def validate(self, value):
-    #     super().validate(value)
-    #
-    #     if value >= datetime.today().replace(tzinfo=UTC):
-    #         raise ValidationError('Only past dates are allowed here!')
 
+    def validate(self, value):
+        super().validate(value)
+
+        if value >= date.today():
+            raise ValidationError('Only past dates are allowed here!')
 
 class BookForm(forms.ModelForm):
     published = PastDateField(
@@ -32,16 +31,8 @@ class BookForm(forms.ModelForm):
         fields = "__all__"
 
 
-class InventoryForm(forms.ModelForm):
+class BookInstanceForm(forms.ModelForm):
 
     class Meta:
-        model = Inventory
-        fields = ('amount_stored', )
-
-
-class BookInventoryForm(MultiModelForm):
-    form_classes = {
-        'book': BookForm,
-        'inventory': InventoryForm,
-    }
-
+        model = BookInstance
+        fields = ('book', 'status')

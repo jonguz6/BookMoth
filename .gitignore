@@ -141,3 +141,4 @@ cython_debug/
 *.env
 
 /.idea/
+/django_secrets.py

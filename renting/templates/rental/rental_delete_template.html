@@ -1,0 +1,27 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content flex column">
+        <div class="title">
+            <h1 class="title">
+                Return book
+            </h1>
+            <h3>
+                {{ object.book.book.title_short }}
+            </h3>
+            <h2 class="subtitle">
+                {{ object.profile }}
+            </h2>
+        </div>
+        <div class="object-form">
+            <form method="post" class="content_form rental rental-delete">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="buttons">
+                    <input type="submit"
+                           value="Return"
+                           class="button button-delete">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

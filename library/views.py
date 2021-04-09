@@ -35,36 +35,44 @@ class BookDeleteView(views.DeleteView):
     success_url = reverse_lazy("library:book-list")
 
 
-class InventoryCreateView(views.CreateView):
-    model = models.Inventory
-    template_name = "inventory/inventory_create_template.html"
-    form_class = forms.InventoryForm
-    success_url = reverse_lazy("library:inventory-list")
+class BookInstanceCreateView(views.CreateView):
+    model = models.BookInstance
+    template_name = "book_instance/book_instance_create_template.html"
+    form_class = forms.BookInstanceForm
+    success_url = reverse_lazy("library:book-instance-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        book = self.kwargs.get('book_id')
+        if book is None:
+            return kwargs
+        kwargs['initial'] = {'book': models.BookInstance.objects.get(id=book)}
+        return kwargs
 
 
-class InventoryListView(views.ListView):
-    model = models.Inventory
-    template_name = "inventory/inventory_list_template.html"
+class BookInstanceListView(views.ListView):
+    model = models.BookInstance
+    template_name = "book_instance/book_instance_list_template.html"
 
 
-class InventoryDetailView(views.DetailView):
-    model = models.Inventory
-    template_name = "inventory/inventory_detail_template.html"
+class BookInstanceDetailView(views.DetailView):
+    model = models.BookInstance
+    template_name = "book_instance/book_instance_detail_template.html"
 
 
-class InventoryUpdateView(views.UpdateView):
-    model = models.Inventory
-    template_name = "inventory/inventory_update_template.html"
-    form_class = forms.InventoryForm
-    success_url = reverse_lazy("library:inventory-list")
+class BookInstanceUpdateView(views.UpdateView):
+    model = models.BookInstance
+    template_name = "book_instance/book_instance_update_template.html"
+    form_class = forms.BookInstanceForm
+    success_url = reverse_lazy("library:book-instance-list")
 
 
-class InventoryDeleteView(views.DeleteView):
-    model = models.Inventory
-    template_name = "inventory/inventory_delete_template.html"
-    success_url = reverse_lazy("library:inventory-list")
-
-
+class BookInstanceDeleteView(views.DeleteView):
+    model = models.BookInstance
+    template_name = "book_instance/book_instance_delete_template.html"
+    success_url = reverse_lazy("library:book-instance-list")
+    
+    
 def index(request):
     return render(
         request, template_name="book/book_index.html"
