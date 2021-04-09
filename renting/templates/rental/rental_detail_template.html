@@ -1,0 +1,28 @@
+{% extends 'book_base.html' %}
+{% block content %}
+    <div class="content">
+        <div class="object-detail flex">
+            <ul>
+                <li>
+                    <h1>{{ object.profile }}</h1>
+                </li>
+                <li>
+                    <a href="{% url 'library:book-instance-detail' pk=object.book.pk %}">{{ object.book.book.title }}</a>
+                </li>
+                <li>
+                    {{ object.date_rented }}
+                </li>
+            </ul>
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-update"
+                   value="Update"
+                   onclick="location.href=
+                           '{% url 'renting:rental-update' pk=object.pk %}'">
+            <input type="button" class="button button-delete" value="Return"
+                   onclick="location.href=
+                           '{% url 'renting:rental-delete' pk=object.pk %}'">
+        </div>
+    </div>
+{% endblock %}

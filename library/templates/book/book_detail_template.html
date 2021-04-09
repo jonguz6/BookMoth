@@ -4,7 +4,8 @@
         <div class="object-detail flex">
             {% if object.picture.url != '' %}
                 <div class="object-image">
-                    <img class="object-image" src="/static/{{ object.picture.url }}" alt="{{ object.title }} book cover">
+                    <img class="object-image" src="/static/{{ object.picture.url }}"
+                         alt="{{ object.title }} book cover">
                 </div>
             {% endif %}
             <div class="object-detail flex column">
@@ -14,6 +15,10 @@
                     <li>
                         <span class="object-detail object-descriptor">ISBN: </span>
                         <span class="object-detail object-info">{{ object.isbn_13 }}</span>
+                    </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Short Title:</span>
+                        <span class="object-detail object-info">{{ object.title_short }}</span>
                     </li>
                     <li>
                         <span class="object-detail object-descriptor">Edition: </span>
@@ -35,22 +40,45 @@
                             {{ object.published | date:'M Y' }}
                         </span>
                     </li>
+                    <li>
+                        <span class="object-detail object-descriptor">Available:</span>
+                        <span class="object-detail object-info">
+                            {{ object.not_rented }} / {{ object.amount_stored }}
+                        </span>
+                    </li>
                 </ul>
                 <div class="object-price">
-                    <h3 class="object-price">
+                    <span class="object-price object-descriptor">
                         List price:
+                    </span>
+                    <span class="object-price object-info">
                         {{ object.list_price }}
-                    </h3>
+                    </span>
                 </div>
             </div>
         </div>
         <div class="buttons">
-            <input type="button" class="button button-create" value="Update"
+            <input type="button"
+                   class="button button-update"
+                   value="Update"
                    onclick="location.href=
                            '{% url 'library:book-update' pk=object.pk %}'">
             <input type="button" class="button button-delete" value="Delete"
                    onclick="location.href=
                            '{% url 'library:book-delete' pk=object.pk %}'">
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-create"
+                   value="Create New Instance"
+                   onclick="location.href=
+                           '{% url 'library:book-instance-create' book_id=object.id %}'">
+        </div>
+        <div class="buttons">
+            <input type="button"
+                   class="button button-create"
+                   value="Rent"
+                   onclick="location.href='{% url 'renting:rental-create' book_id=object.pk %}'">
         </div>
     </div>
 {% endblock %}

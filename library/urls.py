@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path
 
 from library import views
 
@@ -21,6 +21,25 @@ urlpatterns = [
     ),
     path(
         'book-delete/<pk>', views.BookDeleteView.as_view(), name="book-delete"
+    ),
+
+    path(
+        'book-instance-create/', views.BookInstanceCreateView.as_view(), name="book-instance-create-empty"
+    ),
+    path(
+        'book-instance-create/<book_id>', views.BookInstanceCreateView.as_view(), name="book-instance-create"
+    ),
+    path(
+        'book-instance-list/', views.BookInstanceListView.as_view(), name="book-instance-list"
+    ),
+    path(
+        'book-instance-detail/<pk>', views.BookInstanceDetailView.as_view(), name="book-instance-detail"
+    ),
+    path(
+        'book-instance-update/<pk>', views.BookInstanceUpdateView.as_view(), name="book-instance-update"
+    ),
+    path(
+        'book-instance-delete/<pk>', views.BookInstanceDeleteView.as_view(), name="book-instance-delete"
     ),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,7 @@
     <div class="content flex column">
         <div class="object-title">
             <h1 class="object-title">
-                Books
+                Rentals
             </h1>
         </div>
         <div class="object-list">
@@ -12,20 +12,15 @@
                     <li class="object-list">
                         <p class="object-list object-title">
                             <a class="object-list"
-                               href="{% url 'library:book-detail' pk=object.pk %}">
-                                {{ object.title_short }}
+                               href="{% url 'renting:rental-detail' pk=object.pk %}">
+                                <span>{{ object.profile }}</span>
+                                <br>
+                                <span>{{ object.book.title }}</span>
                             </a>
-                        </p>
-                        <p class="object-list object-subtitle">
-                            {{ object.author }}
                         </p>
                     </li>
                 {% endfor %}
             </ul>
-        </div>
-        <div class="buttons">
-            <input type="button" class="button button-create" value="Create New"
-                   onclick="location.href='{% url 'library:book-create' %}'">
         </div>
     </div>
 {% endblock %}
