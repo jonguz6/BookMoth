@@ -11,54 +11,16 @@
             <div class="object-detail flex column">
                 <h1 class="object-detail object-title">{{ object.book.title }}</h1>
                 <h2 class="object_detail object-author">{{ object.book.author }}</h2>
-                <ul>
-                    <li>
-                        <span class="object-detail object-descriptor">ISBN: </span>
-                        <span class="object-detail object-info">{{ object.book.isbn_13 }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Short Title:</span>
-                        <span class="object-detail object-info">{{ object.book.title_short }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Edition: </span>
-                        <span class="object-detail object-info">{{ object.book.edition }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Binding: </span>
-                        <span class="object-detail object-info">
-                            {{ object.book.get_binding_display }}
-                        </span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Publisher:</span>
-                        <span class="object-detail object-info">{{ object.book.publisher }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Date published:</span>
-                        <span class="object-detail object-info">
-                            {{ object.book.published | date:'M Y' }}
-                        </span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Available:</span>
-                        <span class="object-detail object-info">
-                            {{ object.book.not_rented }} / {{ object.book.amount_stored }}
-                        </span>
-                    </li>
-                </ul>
-                <div class="object-price">
-                    <span class="object-price object-descriptor">
-                        List price:
-                    </span>
-                    <span class="object-price object-info">
-                        {{ object.book.list_price }}
-                    </span>
-                </div>
             </div>
         </div>
         <div class="object-detail">
-            <p>{{ object.unique_id }}</p>
+            <p>ID:  {{ object.unique_id }}</p>
+            <p>STATUS: {{ object.get_status_display }}</p>
+            <p>Current user: {{ request.user }}</p>
+            {% if object.rentals.profile.user == request.user %}
+                <p>User renting: {{ object.rentals.profile }}</p>
+            {% endif %}
+
         </div>
         <div class="buttons">
             <input type="button"
@@ -71,10 +33,18 @@
                            '{% url 'library:book-instance-delete' pk=object.pk %}'">
         </div>
         <div class="buttons">
-            <input type="button"
-                   class="button button-create"
-                   value="Rent"
-                   onclick="location.href='{% url 'renting:rental-create' book=object.book.pk %}'">
+            {% if object.is_available %}
+                <input type="button"
+                       class="button button-create"
+                       value="Rent"
+                       onclick="location.href='{% url 'renting:rental-create' book_id=object.book.pk %}'">
+            {% endif %}
+            {% if object.is_loaned %}
+                <input type="button"
+                       class="button button-delete"
+                       value="Return"
+                       onclick="location.href='{% url 'renting:rental-delete' pk=object.rentals.pk %}'">
+            {% endif %}
         </div>
     </div>
 {% endblock %}

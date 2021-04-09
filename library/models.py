@@ -2,7 +2,10 @@ import re
 import uuid
 
 from django.db import models
-from django.db.models import Q
+from django.db.models.signals import pre_save, post_delete
+from django.dispatch import receiver
+
+from renting.models import CurrentRental
 
 
 class Book(models.Model):
@@ -28,8 +31,7 @@ class Book(models.Model):
 
     @property
     def not_rented(self):
-        amount_rented = self.instance.filter(Q(status='O') | Q(status='R'), book=self).count()
-        return self.amount_stored - amount_rented
+        return self.instance.filter(status='A').count()
 
     @property
     def title_short(self):
@@ -51,4 +53,49 @@ class BookInstance(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='m')
 
     def __str__(self):
-        return f"{self.unique_id} - {self.book.title_short}"
+        return f'{self.unique_id} - {self.book.title_short}'
+
+    @property
+    def is_available(self):
+        if self.status == 'A':
+            return True
+        return False
+
+    @property
+    def is_loaned(self):
+        if self.status == 'L':
+            return True
+        return False
+
+    def rent(self):
+        if self.status == 'M':
+            return 'err', 'Book is in maintenance!'
+        if self.status == 'L':
+            return 'err', 'Book is on loan!'
+        if self.status == 'R':
+            return 'err', 'Book is reserved!'
+        if self.status == 'A':
+            self.status = 'L'
+            self.save()
+            return 'ok', self.unique_id
+
+    def rent_return(self):
+        if self.status == 'L':
+            self.status = 'A'
+            self.save()
+            return 'ok', self.unique_id
+        return 'err', 'Book cannot be returned'
+
+
+@receiver(pre_save, sender=CurrentRental)
+def rent_book(sender, instance, **kwargs):
+    status = instance.book.rent()
+    if status[0] == 'err':
+        raise Exception(status[1])
+
+
+@receiver(post_delete, sender=CurrentRental)
+def return_book(sender, instance, **kwargs):
+    status = instance.book.rent_return()
+    if status[0] == 'err':
+        raise Exception(status[1])

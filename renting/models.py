@@ -22,9 +22,9 @@ class CurrentRental(models.Model):
     profile = models.ForeignKey(Profile,
                                 on_delete=models.PROTECT,
                                 related_name='rentals')
-    book = models.ForeignKey('library.BookInstance',
-                             on_delete=models.PROTECT,
-                             related_name='rentals')
+    book = models.OneToOneField('library.BookInstance',
+                                on_delete=models.PROTECT,
+                                related_name='rentals')
     date_rented = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -15,6 +15,7 @@
                                href="{% url 'library:book-instance-detail' pk=object.pk %}">
                                 {{ object.book.title_short }}
                             </a>
+                            {{ object.get_status_display }}
                         </p>
                         <p class="object-list object-subtitle">
                             {{ object.unique_id }}

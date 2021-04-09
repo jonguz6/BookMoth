@@ -3,10 +3,12 @@
     <div class="content flex column">
         <div class="title">
             <h1 class="title">
-                Delete Rental
+                Return book
             </h1>
+            <h3>
+                {{ object.book.book.title_short }}
+            </h3>
             <h2 class="subtitle">
-                {{ object.book.title }}
                 {{ object.profile }}
             </h2>
         </div>
@@ -16,7 +18,7 @@
                 {{ form.as_p }}
                 <div class="buttons">
                     <input type="submit"
-                           value="Delete"
+                           value="Return"
                            class="button button-delete">
                 </div>
             </form>
