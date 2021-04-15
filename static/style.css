@@ -21,6 +21,8 @@ html, body {
 /*--- Carousel --*/
 .carousel-inner img {
     height: 32rem;
+    object-fit: cover;
+    width: 100%;
 }
 .carousel-caption {
     position: absolute;
