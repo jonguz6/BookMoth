@@ -20,13 +20,14 @@ html, body {
 
 /*--- Link --*/
 a {
-    color: #431152;
+    color: #782f8f;
+    text-decoration: none;
 }
 a:hover, a:active {
-    color: #782f8f;
+    color: #431152;
 }
 a:focus {
-    color: #431152;
+    color: #782f8f;
 }
 
 /*--- Carousel --*/
