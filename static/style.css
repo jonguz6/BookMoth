@@ -18,6 +18,17 @@ html, body {
     font-size: 1.1em !important;
 }
 
+/*--- Link --*/
+a {
+    color: #431152;
+}
+a:hover, a:active {
+    color: #782f8f;
+}
+a:focus {
+    color: #431152;
+}
+
 /*--- Carousel --*/
 .carousel-inner img {
     height: 32rem;
