@@ -1,14 +1,104 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
+{% block title %}
+    Update {{ object.title_short }}
+{% endblock %}
 {% block content %}
-    <div class="content flex column">
-        <div class="object-form">
-            <form method="post" enctype="multipart/form-data" class="content_form book book-update">
+    <!-- Content -->
+    <div class="content-fluid">
+        <div class="text-center col-sm-6 offset-sm-3">
+            <h1 class=display-2">Update {{ object.title_short }}</h1>
+        </div>
+        <div class="justify-content-center d-flex">
+            <form method="post" enctype="multipart/form-data" class="content_form book book-create">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <div class="buttons">
+                <table class="table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.isbn_13.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.isbn_13 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.title.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.title }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.author.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.author }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.edition.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.edition }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.binding.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.binding }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.publisher.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.publisher }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.published.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.published }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="rowgroup" class=" content-justify-right">
+                            <div class="pt-4 pb-4 badge bg-primary d-flex"><div class="flex-fill flex-grow-1">{{ form.picture.label }}</div>
+                            </div>
+                        </th>
+                        <td>
+                            <div class="pl-2">
+                                {{ form.picture }}
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="col-sm-6 col-md-4 mx-auto pt-5 text-center">
                     <input type="submit"
-                           value="Update"
-                           class="button button-update">
+                           value="Create"
+                           class="btn btn-info">
                 </div>
             </form>
         </div>

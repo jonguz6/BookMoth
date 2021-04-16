@@ -86,7 +86,7 @@ a:focus {
 }
 /*--- Label --*/
 .bg-primary {
-    background-color: #FAEFDE !important;
+    background-color: #FAEFDE  !important;
     color: #782f8f;
     border: 1px solid #431152;
 }
