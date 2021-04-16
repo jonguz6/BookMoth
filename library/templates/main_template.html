@@ -32,7 +32,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
-        <a href="{% url 'library:index' %}" class="navbar-brand"><img src="{% static 'favicon.ico' %}" alt="book logo"></a>
+        <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'favicon.ico' %}" alt="book logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,7 +61,7 @@
 {% for message in messages %}
     <div class="fixed-top alert alert-dismissible fade show
     {% if message.tags %}{{ message.tags }}{% endif %}" role="alert">
-        Messages placeholder
+        {{ message }}
         <button type="button" class="btn-close"
                 data-bs-dismiss="alert" aria-label="Close">
         </button>
@@ -126,38 +126,38 @@
     <!-- Three Column Section -->
     <div class="container-fluid padding">
         <div class="row text-center padding">
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <i class="icon-html5"></i>
                 <h3>HTML5</h3>
                 <p>Built with the latest version of HTML, HTML5</p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <i class="icon-css3"></i>
                 <h3>CSS3</h3>
                 <p>Built with the latest version of CSS, CSS3</p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <i class="icon-bootstrap"></i>
                 <h3>Bootstrap</h3>
                 <p>Built with the latest version of Bootstrap, Bootstrap 5</p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
                 <img class="icon-django svg-inline--fa"
                      src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-ar21.svg"></span>
                 <h3>Django</h3>
                 <p>Built using Django and Django ORM</p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-lg-4">
                 <i class="icon-postgres"></i>
                 <h3>PostgreSQL</h3>
                 <p>Built using PostgreSQL database</p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3 col-xl-2">
+            <div class="col-xs-12 col-sm-6 col-lg-4">
                 <i class="icon-aws"></i>
                 <h3>AWS</h3>
                 <p>Database and static files hosted on AWS</p>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-2">
+            <div class="col-sm-12 col-md-6 col-lg-4">
                 <i class="icon-heroku"></i>
                 <h3>Heroku</h3>
                 <p>Application hosted on Heroku</p>
@@ -236,7 +236,8 @@
                         <p class="card-text">See my others projects on GitHub! Find out what I can do and how well I can
                             do
                             it.</p>
-                        <a href="https://github.com/jonguz6" class="btn btn-outline-secondary btn-md stretched-link">
+                        <a target="_blank" href="https://github.com/jonguz6"
+                           class="btn btn-outline-secondary btn-md stretched-link">
                             Open GitHub
                         </a>
                     </div>
@@ -248,7 +249,7 @@
                     <div class="card-body">
                         <h4 class="card-title">LinkedIn</h4>
                         <p class="card-text">Connect with me on LinkedIn! See my biography and past experience.</p>
-                        <a href="https://www.linkedin.com/in/jonatanguzy/"
+                        <a target="_blank" href="https://www.linkedin.com/in/jonatanguzy/"
                            class="btn btn-outline-secondary btn-md stretched-link">
                             Connect on LinkedIn
                         </a>
@@ -261,7 +262,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Etsy</h4>
                         <p class="card-text">In my free time I make ceramics. Feel free to check them out.</p>
-                        <a href="https://www.etsy.com/shop/DigiClay"
+                        <a target="_blank" href="https://www.etsy.com/shop/DigiClay"
                            class="btn btn-outline-secondary btn-md stretched-link">
                             Open Etsy
                         </a>
@@ -290,7 +291,7 @@
                 <img src="https://bulldogjob.pl/system/companies/logos/000/000/809/original/logo_sda.png" alt="sda logo"
                      class="img-fluid">
                 <a href="#" class="btn btn-outline-secondary">
-                    Show Certificate
+                    Certificate not yet available
                 </a>
             </div>
 
@@ -299,7 +300,8 @@
 {% endblock %}
 <!--- Footer -->
 <footer>
-    <div class="container-fluid padding">
+    <div class="container-fluid padding pt-5">
+        <hr class="my-5">
         <div class="row text-center">
             <div class="col-md-4">
                 <img src="{% static 'favicon.ico' %}" alt="">
@@ -310,7 +312,7 @@
             </div>
             <div class="col-12">
                 <hr class="light">
-                <h5>&copy; Jonatan Guzy</h5>
+                <h5>&copy; Jonatan Guzy, ver. 0.0.1</h5>
             </div>
         </div>
     </div>
