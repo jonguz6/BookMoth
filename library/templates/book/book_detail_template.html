@@ -17,19 +17,22 @@
                 <table class="table table-borderless">
                     <tr>
                         <th scope="row" class=" content-justify-right ">
-                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span></div>
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span>
+                            </div>
                         </th>
                         <td>{{ object.title }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Author</span>
+                            </div>
                         </th>
                         <td>{{ object.author }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">ISBN</span>
+                            </div>
                         </th>
                         <td>{{ object.isbn_13 }}</td>
                     </tr>
@@ -43,30 +46,35 @@
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Edition</span>
+                            </div>
                         </th>
                         <td>{{ object.edition }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Binding</span>
+                            </div>
                         </th>
                         <td>{{ object.get_binding_display }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Publisher</span>
+                            </div>
                         </th>
                         <td>{{ object.publisher }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Date published</span>
+                            </div>
                         </th>
                         <td>{{ object.published | date:'M Y' }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">Available</span>
+                            </div>
                         </th>
                         <td>
                             {{ object.not_rented }} / {{ object.amount_stored }}
@@ -75,6 +83,7 @@
                     <tr>
                         <th scope="row" class=" content-justify-right ">
                             <div class="d-flex justify-content-end"><span class="badge bg-primary">List price</span>
+                            </div>
                         </th>
                         <td>{{ object.list_price }}</td>
                     </tr>
