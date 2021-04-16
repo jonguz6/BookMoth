@@ -84,10 +84,8 @@
     </div>
     <div class="row">
         <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
-            <a type="button"
-               class="btn btn-success"
-               onclick="location.href=
-                       '{% url 'library:book-update' pk=object.pk %}'">Update</a>
+            <a type="button" class="btn btn-success"
+               href="{% url 'library:book-update' pk=object.pk %}">Update</a>
             <a type="button" class="btn btn-danger"
                href="{% url 'library:book-delete' pk=object.pk %}">Delete</a>
         </div>
