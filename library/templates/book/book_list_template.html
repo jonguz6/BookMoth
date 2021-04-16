@@ -1,31 +1,32 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
+{% block title %}
+    Book List
+{% endblock %}
 {% block content %}
-    <div class="content flex column">
-        <div class="object-title">
-            <h1 class="object-title">
+    <div class="container-md padding text-center pt-2">
+        <div class="row padding">
+            <h1 class="display-1">
                 Books
             </h1>
         </div>
-        <div class="object-list">
-            <ul>
+        <div class="col col-md-6 offset-md-3">
+            <ul class="list-group list-group-flush">
                 {% for object in object_list %}
-                    <li class="object-list">
-                        <p class="object-list object-title">
-                            <a class="object-list"
-                               href="{% url 'library:book-detail' pk=object.pk %}">
-                                {{ object.title }}
-                            </a>
-                        </p>
-                        <p class="object-list object-subtitle">
+                    <li class="list-group-item list-group-item-action position-relative">
+                        <a class="stretched-link" href="{% url 'library:book-detail' pk=object.pk %}">
+                            {{ object.title_short }}
+                        </a>
+                        <p>
                             {{ object.author }}
                         </p>
                     </li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="buttons">
-            <input type="button" class="button button-create" value="Create New"
-                   onclick="location.href='{% url 'library:book-create' %}'">
-        </div>
+
+    </div>
+    <div class="content-fluid text-center">
+        <a type="button" class="btn btn-primary"
+           href="{% url 'library:book-create' %}">Create New</a>
     </div>
 {% endblock %}

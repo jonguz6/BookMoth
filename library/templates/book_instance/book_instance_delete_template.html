@@ -1,0 +1,31 @@
+{% extends 'main_template.html' %}
+{% block content %}
+    <div class="content-fluid text-center">
+        <div class="row">
+            <h1 class="display-2">
+                Delete Book Instance
+            </h1>
+        </div>
+        <div class=" row padding">
+            <h2 class="display-4">
+                {{ object.book.title_short }}
+            </h2>
+        </div>
+        <div>
+            <p>
+                id: {{ object.unique_id }}
+            </p>
+        </div>
+        <div class="row">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <div class="mx-auto">
+                    <input type="submit"
+                           value="Delete"
+                           class="btn btn-danger">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

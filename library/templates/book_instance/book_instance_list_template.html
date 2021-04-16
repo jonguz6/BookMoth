@@ -1,0 +1,48 @@
+{% extends 'main_template.html' %}
+{% block title %}
+    Book Instance List
+{% endblock %}
+{% block content %}
+    <div class="container-md padding text-center pt-2">
+        <div class="row padding">
+            <h1 class="display-1">
+                Instances
+            </h1>
+        </div>
+        <div class="col col-md-6 offset-md-3">
+            <ul class="list-group list-group-flush">
+                {% for object in object_list %}
+                    <li class="list-group-item list-group-item-action position-relative">
+                        <p class="object-list object-title">
+                            <a class="stretched-link" href="{% url 'library:book-instance-detail' pk=object.pk %}">
+                                {{ object.book.title_short }}
+                            </a>
+                            {% with object.get_status_display as status %}
+                                <span class="badge
+                                    {% if status == "Available" %}
+                                        bg-success
+                                    {% elif status == "Maintenance" %}
+                                        bg-warning
+                                    {% elif status == "On Loan" %}
+                                        bg-danger
+                                    {% else %}
+                                        bg-info
+                                    {% endif %}
+                                ">
+                                    {{ status }}
+                                </span>
+                            {% endwith %}
+                        </p>
+                        <p>
+                            id: {{ object.unique_id }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="buttons">
+            <a type="button" class="btn btn-primary"
+               href="{% url 'library:book-instance-create-empty' %}">Create New Instance</a>
+        </div>
+    </div>
+{% endblock %}

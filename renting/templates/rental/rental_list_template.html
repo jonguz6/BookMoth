@@ -1,0 +1,30 @@
+{% extends 'main_template.html' %}
+{% block title %}
+    Rental List
+{% endblock %}
+{% block content %}
+    <div class="container-md padding text-center pt-2">
+        <div class="row padding">
+            <h1 class="display-1">
+                Rentals
+            </h1>
+        </div>
+        <div class="col col-md-6 offset-md-3">
+            <ul class="list-group list-group-flush">
+                {% for object in object_list %}
+                    <li class="list-group-item list-group-item-action position-relative">
+                        <a class="stretched-link" href="{% url 'renting:rental-detail' pk=object.pk %}">
+                            {{ object.book.book.title_short }}
+                        </a>
+                        <p>
+                            {{ object.profile }}
+                        </p>
+                        <p>
+                            {{ object.date_rented }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

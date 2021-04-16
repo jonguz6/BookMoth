@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'library',
-    'renting',
+    'fontawesome-free',
+
+    'library.apps.LibraryConfig',
+    'renting.apps.RentingConfig',
 
     'storages',
 ]
@@ -130,6 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 MEDIA_URL = '/images/'
+
+LOGIN_REDIRECT_URL = '/'
 
 AWS_ACCESS_KEY_ID = django_secrets.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = django_secrets.AWS_SECRET_ACCESS_KEY

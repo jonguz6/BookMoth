@@ -1,0 +1,43 @@
+{% extends 'main_template.html' %}
+{% block title %}
+    Update {{ object.book.title_short }} Instance
+{% endblock %}
+{% block content %}
+    <div class="content-fluid">
+        <div class="text-center col-sm-6 offset-sm-3">
+            <h1 class=display-2">Update {{ object.title_short }}</h1>
+        </div>
+        <div class="justify-content-center d-flex">
+            <form method="post" enctype="multipart/form-data" class="content_form book book-create">
+                {% csrf_token %}
+                <table class="table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.book.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.book }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.status.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.status }}
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-sm-6 col-md-4 mx-auto pt-5 text-center">
+                    <input type="submit"
+                           value="Update"
+                           class="btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

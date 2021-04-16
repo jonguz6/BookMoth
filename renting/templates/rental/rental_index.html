@@ -1,0 +1,11 @@
+{% extends 'main_template.html' %}
+{% block content %}
+    <div class="container-fluid text-center padding">
+        <h1 class="display-1 padding"> Index</h1>
+        <div class="row">
+            <a href="{% url 'renting:rental-list' %}" class="link main-site">
+                <h2>Rentals</h2>
+            </a>
+        </div>
+    </div>
+{% endblock %}

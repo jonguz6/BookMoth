@@ -1,0 +1,27 @@
+{% extends 'main_template.html' %}
+{% block content %}
+    <div class="content-fluid text-center">
+        <div class="row">
+            <h1 class="display-2">
+                Return Book
+            </h1>
+        </div>
+        <div class="row padding">
+            <p class="lead">{{ object.book.book.title_short }}</p>
+            <p>
+                {{ object.profile }}
+            </p>
+        </div>
+        <div class="row">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <div class="mx-auto">
+                    <input type="submit"
+                           value="Return"
+                           class="btn btn-danger">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
