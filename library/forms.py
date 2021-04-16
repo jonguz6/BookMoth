@@ -18,6 +18,7 @@ class PastDateField(forms.DateField):
         if value >= date.today():
             raise ValidationError('Only past dates are allowed here!')
 
+
 class BookForm(forms.ModelForm):
     published = PastDateField(
         label="Publication Date",
@@ -32,6 +33,14 @@ class BookForm(forms.ModelForm):
 
 
 class BookInstanceForm(forms.ModelForm):
+
+    class Meta:
+        model = BookInstance
+        fields = ('book', 'status')
+
+
+class LockedBookInstanceForm(forms.ModelForm):
+    book = forms.ModelChoiceField(Book.objects.all(), disabled=True)
 
     class Meta:
         model = BookInstance
