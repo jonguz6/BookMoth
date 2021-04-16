@@ -3,7 +3,7 @@
     {{ object.title_short }}
 {% endblock %}
 {% block content %}
-    <div class="content-fluid">
+    <div class="content-fluid pt-2">
         <div class="row">
             <div class="col-md-6">
                 {% if object.picture.url != '' %}
@@ -13,11 +13,11 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 align-self-center">
                 <table class="table table-borderless">
                     <tr>
                         <th scope="row" class=" content-justify-right ">
-                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span>
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span></div>
                         </th>
                         <td>{{ object.title }}</td>
                     </tr>
@@ -93,12 +93,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-4 mx-auto btn-group" role="group">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
             <a type="button"
                class="btn btn-primary"
                href="{% url 'library:book-instance-create' book_id=object.id %}">Create New Instance</a>
         </div>
-        <div class="col-sm-6 col-md-4 mx-auto btn-group" role="group">
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
             <a type="button"
                class="btn btn-primary"
                href="{% url 'renting:rental-create' book_id=object.pk %}">Rent</a>
