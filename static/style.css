@@ -91,10 +91,13 @@ a:focus {
     border: 1px solid #431152;
 }
 
-/*--- Input --*/
+/*--- Forms --*/
 input {
     color: #782f8f;
     border: 1px solid #431152;
+}
+select {
+    max-width: 50vw;
 }
 /*--- Jumbotron --*/
 .jumbotron {
