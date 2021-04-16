@@ -1,14 +1,41 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
+{% block title %}
+    Create Book Instance
+{% endblock %}
 {% block content %}
-    <div class="content flex column">
-        <div class="object-form">
+    <div class="content-fluid">
+        <div class="text-center col-sm-6 offset-sm-3">
+            <h1 class=display-2">Create Book Instance</h1>
+        </div>
+        <div class="justify-content-center d-flex">
             <form method="post" enctype="multipart/form-data" class="content_form book book-create">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <div class="buttons">
+                <table class="table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.book.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.book }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-center badge bg-primary">
+                                {{ form.status.label }}
+                            </div>
+                        </th>
+                        <td>
+                            {{ form.status }}
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-sm-6 col-md-4 mx-auto text-center pt-5">
                     <input type="submit"
                            value="Create"
-                           class="button button-create">
+                           class="btn btn-info">
                 </div>
             </form>
         </div>

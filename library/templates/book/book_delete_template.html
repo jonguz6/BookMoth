@@ -1,22 +1,24 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
 {% block content %}
-    <div class="content flex column">
-        <div class="title">
-            <h1 class="title">
+    <div class="content-fluid text-center">
+        <div class="row">
+            <h1 class="display-2">
                 Delete Book
             </h1>
-            <h2 class="subtitle">
-                {{ book.title }}
+        </div>
+        <div class="row padding">
+            <h2 class="display-4">
+                {{ book.title_short }}
             </h2>
         </div>
-        <div class="object-form">
-            <form method="post" enctype="multipart/form-data" class="content_form book book-delete">
+        <div class="row">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <div class="buttons">
+                {{ form }}
+                <div class="mx-auto">
                     <input type="submit"
                            value="Delete"
-                           class="button button-delete">
+                           class="btn btn-danger">
                 </div>
             </form>
         </div>

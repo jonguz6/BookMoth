@@ -1,50 +1,86 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
+{% block title %}
+    {{ object.book.title_short }}
+{% endblock %}
 {% block content %}
-    <div class="content">
-        <div class="object-detail flex">
-            {% if object.book.picture.url != '' %}
-                <div class="object-image">
-                    <img class="object-image" src="/static/{{ object.book.picture.url }}"
-                         alt="{{ object.book.title }} book cover">
-                </div>
-            {% endif %}
-            <div class="object-detail flex column">
-                <h1 class="object-detail object-title">{{ object.book.title }}</h1>
-                <h2 class="object_detail object-author">{{ object.book.author }}</h2>
+    <div class="content-fluid pt-2 padding">
+        <div class="row">
+            <div class="col-md-6">
+                {% if object.book.picture.url != '' %}
+                    <div class="text-center">
+                        <img class="img-fluid rounded" src="/static/{{ object.book.picture.url }}"
+                             alt="{{ object.title }} book cover">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 align-self-center">
+                <table class="table table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span>
+                            </div>
+                        </th>
+                        <td>{{ object.book.title_short }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Author</span>
+                            </div>
+                        </th>
+                        <td>{{ object.book.author }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">ID</span>
+                            </div>
+                        </th>
+                        <td>{{ object.unique_id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Status</span>
+                            </div>
+                        </th>
+                        <td>{{ object.get_status_display }}</td>
+                    </tr>
+                    {% if object.rentals.profile.user == request.user %}
+                        <tr>
+                            <th scope="row" class=" content-justify-right ">
+                                <div class="d-flex justify-content-end"><span
+                                        class="badge bg-primary">User renting</span>
+                                </div>
+                            </th>
+                            <td>{{ object.rentals.profile }}</td>
+                        </tr>
+                    {% endif %}
+                </table>
             </div>
         </div>
-        <div class="object-detail">
-            <p>ID:  {{ object.unique_id }}</p>
-            <p>STATUS: {{ object.get_status_display }}</p>
-            <p>Current user: {{ request.user }}</p>
-            {% if object.rentals.profile.user == request.user %}
-                <p>User renting: {{ object.rentals.profile }}</p>
-            {% endif %}
-
-        </div>
-        <div class="buttons">
-            <input type="button"
-                   class="button button-update"
-                   value="Update"
-                   onclick="location.href=
-                           '{% url 'library:book-instance-update' pk=object.pk %}'">
-            <input type="button" class="button button-delete" value="Delete"
-                   onclick="location.href=
-                           '{% url 'library:book-instance-delete' pk=object.pk %}'">
-        </div>
-        <div class="buttons">
-            {% if object.is_available %}
-                <input type="button"
-                       class="button button-create"
-                       value="Rent"
-                       onclick="location.href='{% url 'renting:rental-create' book_id=object.book.pk %}'">
-            {% endif %}
-            {% if object.is_loaned %}
-                <input type="button"
-                       class="button button-delete"
-                       value="Return"
-                       onclick="location.href='{% url 'renting:rental-delete' pk=object.rentals.pk %}'">
-            {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+            <a type="button" class="btn btn-success"
+               href="{% url 'library:book-instance-update' pk=object.pk %}">Update</a>
+            <a type="button" class="btn btn-danger"
+               href="{% url 'library:book-instance-delete' pk=object.pk %}">Delete</a>
         </div>
     </div>
+    {% if object.is_available %}
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+                <a type="button"
+                   class="btn btn-primary"
+                   href="{% url 'renting:rental-create' book_id=object.book.pk %}">Rent</a>
+            </div>
+        </div>
+    {% endif %}
+    {% if object.is_loaned %}
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+                <a type="button"
+                   class="btn btn-primary"
+                   href="{% url 'renting:rental-delete' pk=object.rentals.pk %}">Return</a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -1,33 +1,50 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
 {% block content %}
-    <div class="content flex column">
-        {% if form.errors %}
-            <p>Your username and password didn't match. Please try again.</p>
-        {% endif %}
-        {% if next %}
-            {% if user.is_authenticated %}
-                <p>Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.</p>
-            {% else %}
-                <p>Please login to see this page.</p>
+    <div class="content-fluid pt-2">
+        <div class="col-sm-6 offset-sm-3">
+            {% if form.errors %}
+                <div class="alert alert-warning">
+                    Your username and password didn't match. Please try again.
+                </div>
             {% endif %}
-        {% endif %}
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td>{{ form.username.label_tag }}</td>
-                    <td>{{ form.username }}</td>
-                </tr>
-                <tr>
-                    <td>{{ form.password.label_tag }}</td>
-                    <td>{{ form.password }}</td>
-                </tr>
-            </table>
-            <input type="submit" value="Login" class="button button-create"/>
-            <input type="hidden" name="next" value="{{ next }}"/>
-        </form>
-
-        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <div class="alert alert-danger">
+                        Your account doesn't have access to this page. To proceed,
+                        please login with an account that has access.
+                    </div>
+                {% else %}
+                    <div class="alert-alert-warning">Please login to see this page.</div>
+                {% endif %}
+            {% endif %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table class="table table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end">
+                                <span class="badge bg-primary">{{ form.username.label }}</span>
+                            </div>
+                        </th>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end">
+                                <span class="badge bg-primary">{{ form.password.label }}</span>
+                            </div>
+                        </th>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                </table>
+                <div class="pt-5 text-center">
+                    <input type="submit" value="Login" class="btn btn-success"/>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row text-center">
+        <a href="{% url 'password_reset' %}">Lost password?</a>
     </div>
 {% endblock %}

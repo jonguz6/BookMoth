@@ -63,7 +63,7 @@ class BookInstanceDetailView(views.DetailView):
 class BookInstanceUpdateView(views.UpdateView):
     model = models.BookInstance
     template_name = "book_instance/book_instance_update_template.html"
-    form_class = forms.BookInstanceForm
+    form_class = forms.LockedBookInstanceForm
     success_url = reverse_lazy("library:book-instance-list")
 
 

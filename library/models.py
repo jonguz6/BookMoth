@@ -53,7 +53,7 @@ class BookInstance(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='m')
 
     def __str__(self):
-        return f'{self.unique_id} - {self.book.title_short}'
+        return f'{self.book.title_short} - {self.unique_id}'
 
     @property
     def is_available(self):

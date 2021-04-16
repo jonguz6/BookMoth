@@ -1,84 +1,116 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
+{% block title %}
+    {{ object.title_short }}
+{% endblock %}
 {% block content %}
-    <div class="content">
-        <div class="object-detail flex">
-            {% if object.picture.url != '' %}
-                <div class="object-image">
-                    <img class="object-image" src="/static/{{ object.picture.url }}"
-                         alt="{{ object.title }} book cover">
-                </div>
-            {% endif %}
-            <div class="object-detail flex column">
-                <h1 class="object-detail object-title">{{ object.title }}</h1>
-                <h2 class="object_detail object-author">{{ object.author }}</h2>
-                <ul>
-                    <li>
-                        <span class="object-detail object-descriptor">ISBN: </span>
-                        <span class="object-detail object-info">{{ object.isbn_13 }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Short Title:</span>
-                        <span class="object-detail object-info">{{ object.title_short }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Edition: </span>
-                        <span class="object-detail object-info">{{ object.edition }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Binding: </span>
-                        <span class="object-detail object-info">
-                            {{ object.get_binding_display }}
-                        </span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Publisher:</span>
-                        <span class="object-detail object-info">{{ object.publisher }}</span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Date published:</span>
-                        <span class="object-detail object-info">
-                            {{ object.published | date:'M Y' }}
-                        </span>
-                    </li>
-                    <li>
-                        <span class="object-detail object-descriptor">Available:</span>
-                        <span class="object-detail object-info">
+    <div class="content-fluid pt-2 padding">
+        <div class="row">
+            <div class="col-md-6">
+                {% if object.picture.url != '' %}
+                    <div class="text-center">
+                        <img class="img-fluid rounded" src="/static/{{ object.picture.url }}"
+                             alt="{{ object.title }} book cover">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 align-self-center">
+                <table class="table table-borderless">
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Title</span>
+                            </div>
+                        </th>
+                        <td>{{ object.title }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Author</span>
+                            </div>
+                        </th>
+                        <td>{{ object.author }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">ISBN</span>
+                            </div>
+                        </th>
+                        <td>{{ object.isbn_13 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Short Title</span>
+                            </div>
+                        </th>
+                        <td>{{ object.title_short }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Edition</span>
+                            </div>
+                        </th>
+                        <td>{{ object.edition }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Binding</span>
+                            </div>
+                        </th>
+                        <td>{{ object.get_binding_display }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Publisher</span>
+                            </div>
+                        </th>
+                        <td>{{ object.publisher }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Date published</span>
+                            </div>
+                        </th>
+                        <td>{{ object.published | date:'M Y' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">Available</span>
+                            </div>
+                        </th>
+                        <td>
                             {{ object.not_rented }} / {{ object.amount_stored }}
-                        </span>
-                    </li>
-                </ul>
-                <div class="object-price">
-                    <span class="object-price object-descriptor">
-                        List price:
-                    </span>
-                    <span class="object-price object-info">
-                        {{ object.list_price }}
-                    </span>
-                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class=" content-justify-right ">
+                            <div class="d-flex justify-content-end"><span class="badge bg-primary">List price</span>
+                            </div>
+                        </th>
+                        <td>{{ object.list_price }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="buttons">
-            <input type="button"
-                   class="button button-update"
-                   value="Update"
-                   onclick="location.href=
-                           '{% url 'library:book-update' pk=object.pk %}'">
-            <input type="button" class="button button-delete" value="Delete"
-                   onclick="location.href=
-                           '{% url 'library:book-delete' pk=object.pk %}'">
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+            <a type="button" class="btn btn-success"
+               href="{% url 'library:book-update' pk=object.pk %}">Update</a>
+            <a type="button" class="btn btn-danger"
+               href="{% url 'library:book-delete' pk=object.pk %}">Delete</a>
         </div>
-        <div class="buttons">
-            <input type="button"
-                   class="button button-create"
-                   value="Create New Instance"
-                   onclick="location.href=
-                           '{% url 'library:book-instance-create' book_id=object.id %}'">
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+            <a type="button"
+               class="btn btn-primary"
+               href="{% url 'library:book-instance-create' book_id=object.id %}">Create New Instance</a>
         </div>
-        <div class="buttons">
-            <input type="button"
-                   class="button button-create"
-                   value="Rent"
-                   onclick="location.href='{% url 'renting:rental-create' book_id=object.pk %}'">
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+            <a type="button"
+               class="btn btn-primary"
+               href="{% url 'renting:rental-create' book_id=object.pk %}">Rent</a>
         </div>
     </div>
 {% endblock %}

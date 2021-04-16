@@ -1,28 +1,47 @@
-{% extends 'book_base.html' %}
+{% extends 'main_template.html' %}
 {% block content %}
-    <div class="content">
-        <div class="object-detail flex">
-            <ul>
-                <li>
-                    <h1>{{ object.profile }}</h1>
-                </li>
-                <li>
-                    <a href="{% url 'library:book-instance-detail' pk=object.book.pk %}">{{ object.book.book.title }}</a>
-                </li>
-                <li>
-                    {{ object.date_rented }}
-                </li>
-            </ul>
+    <div class="container-fluid pt-2 padding">
+    <div class="row">
+        <div class="col-md-6 align-self-center">
+            <table class="table table-borderless">
+                <tr>
+                    <th scope="row" class=" content-justify-right ">
+                        <div class="d-flex justify-content-end"><span class="badge bg-primary">User Renting</span>
+                        </div>
+                    </th>
+                    <td>
+                        {{ object.profile }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class=" content-justify-right ">
+                        <div class="d-flex justify-content-end"><span class="badge bg-primary">Book</span>
+                        </div>
+                    </th>
+                    <td>
+                        <a href="{% url 'library:book-instance-detail' pk=object.book.pk %}">
+                            {{ object.book.book.title_short }}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class=" content-justify-right ">
+                        <div class="d-flex justify-content-end"><span class="badge bg-primary">Date rented</span>
+                        </div>
+                    </th>
+                    <td>
+                        {{ object.date_rented }}
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="buttons">
-            <input type="button"
-                   class="button button-update"
-                   value="Update"
-                   onclick="location.href=
-                           '{% url 'renting:rental-update' pk=object.pk %}'">
-            <input type="button" class="button button-delete" value="Return"
-                   onclick="location.href=
-                           '{% url 'renting:rental-delete' pk=object.pk %}'">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
+                <a type="button" class="btn btn-success"
+                   href="{% url 'renting:rental-update' pk=object.pk %}">Update</a>
+                <a type="button" class="btn btn-danger"
+                   href="{% url 'renting:rental-delete' pk=object.pk %}">Return</a>
+            </div>
         </div>
     </div>
 {% endblock %}
