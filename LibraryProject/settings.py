@@ -17,8 +17,6 @@ from dj_database_url import parse as db_url
 from decouple import config
 from django.core.exceptions import ImproperlyConfigured
 
-import django_secrets
-
 
 def get_env_value(env_variable):
     try:
