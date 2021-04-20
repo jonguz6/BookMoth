@@ -22,7 +22,7 @@ class Book(models.Model):
     binding = models.CharField(max_length=2, choices=BINDING_CHOICES)
     publisher = models.CharField(max_length=50)
     published = models.DateField()
-    picture = models.ImageField(null=True, blank=True)
+    picture = models.ImageField(upload_to="books/")
     list_price = models.FloatField()
 
     @property
