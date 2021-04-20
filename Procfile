@@ -1,1 +1,1 @@
-web: gunicorn NutritionGenius.wsgi
+web: gunicorn LibraryProject.wsgi
