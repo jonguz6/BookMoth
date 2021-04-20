@@ -12,9 +12,21 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 from dj_database_url import parse as db_url
 from decouple import config
+from django.core.exceptions import ImproperlyConfigured
+
 import django_secrets
+
+
+def get_env_value(env_variable):
+    try:
+        return os.environ[env_variable]
+    except KeyError:
+        error_msg = f'Set the {env_variable} environment variable'
+        raise ImproperlyConfigured(error_msg)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +36,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(django_secrets.SECRET_KEY)
+SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(django_secrets.DEBUG)
+DEBUG = get_env_value('DEBUG') == 'True'
 
-ALLOWED_HOSTS = django_secrets.ALLOWED_HOSTS
+ALLOWED_HOSTS = get_env_value('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -41,8 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'fontawesome-free',
 
     'library.apps.LibraryConfig',
     'renting.apps.RentingConfig',
@@ -58,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -85,7 +97,16 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = django_secrets.DATABASES
+DATABASES = {}
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES['default'] = dj_database_url.config(default=get_env_value('DATABASE_URL'))
 
 
 # Password validation
@@ -124,24 +145,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = 'https://library-project-bucket.s3.eu-central-1.amazonaws.com/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = '/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/')
+]
 
-AWS_ACCESS_KEY_ID = django_secrets.AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = django_secrets.AWS_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = django_secrets.AWS_STORAGE_BUCKET_NAME
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_S3_HOST = "s3.eu-central-1.amazonaws.com"
-AWS_S3_REGION_NAME = "eu-central-1"
-AWS_S3_ADDRESSING_STYLE = "virtual"
+LOGIN_URL = '/accounts/login'
+# LOGIN_REDIRECT_URL = '/profiles/user'

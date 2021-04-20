@@ -46,7 +46,7 @@ class BookInstanceCreateView(views.CreateView):
         book = self.kwargs.get('book_id')
         if book is None:
             return kwargs
-        kwargs['initial'] = {'book': models.BookInstance.objects.get(id=book)}
+        kwargs['initial'] = {'book': models.Book.objects.get(id=book)}
         return kwargs
 
 
