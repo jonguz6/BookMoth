@@ -1,4 +1,4 @@
-# LibraryProject
+# BookMoth
 A Django project to recreate an online library/shop
 
 # Summary
