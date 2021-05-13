@@ -42,4 +42,3 @@ urlpatterns = [
         'book-instance-delete/<pk>', views.BookInstanceDeleteView.as_view(), name="book-instance-delete"
     ),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
