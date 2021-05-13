@@ -13,8 +13,6 @@ import os
 from pathlib import Path
 
 import dj_database_url
-from dj_database_url import parse as db_url
-from decouple import config
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -95,17 +93,7 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {}
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES['default'] = dj_database_url.config(default=get_env_value('DATABASE_URL'))
-
+DATABASES = {'default': dj_database_url.config(default=get_env_value('DATABASE_URL'))}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -143,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -155,4 +143,4 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/accounts/login'
-# LOGIN_REDIRECT_URL = '/profiles/user'
+LOGIN_REDIRECT_URL = '/'
