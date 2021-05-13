@@ -8,8 +8,8 @@
             <div class="col-md-6">
                 {% if object.picture.url != '' %}
                     <div class="text-center">
-                        <img class="img-fluid rounded" src="/static/{{ object.picture.url }}"
-                             alt="{{ object.title }} book cover">
+                        <img class="img-fluid rounded" src="{{ object.picture.url }}"
+                             alt="{{ object.title_short }} book cover">
                     </div>
                 {% endif %}
             </div>

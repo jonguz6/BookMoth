@@ -2,7 +2,6 @@ from datetime import date
 
 import pytz
 from django import forms
-from betterforms.multiform import MultiModelForm
 from django.core.exceptions import ValidationError
 
 from library.models import Book, BookInstance
