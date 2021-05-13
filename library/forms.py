@@ -1,8 +1,7 @@
-from datetime import date
+from datetime import datetime
 
 import pytz
 from django import forms
-from betterforms.multiform import MultiModelForm
 from django.core.exceptions import ValidationError
 
 from library.models import Book, BookInstance
@@ -15,7 +14,7 @@ class PastDateField(forms.DateField):
     def validate(self, value):
         super().validate(value)
 
-        if value >= date.today():
+        if value >= datetime.now().replace(tzinfo=UTC):
             raise ValidationError('Only past dates are allowed here!')
 
 
