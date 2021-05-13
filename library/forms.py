@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 import pytz
 from django import forms
@@ -14,7 +14,7 @@ class PastDateField(forms.DateField):
     def validate(self, value):
         super().validate(value)
 
-        if value >= datetime.now().replace(tzinfo=UTC):
+        if value >= date.today():
             raise ValidationError('Only past dates are allowed here!')
 
 
