@@ -8,8 +8,8 @@
             <div class="col-md-6">
                 {% if object.book.picture.url != '' %}
                     <div class="text-center">
-                        <img class="img-fluid rounded" src="/static/{{ object.book.picture.url }}"
-                             alt="{{ object.title }} book cover">
+                        <img class="img-fluid rounded" src="{{ object.book.picture.url }}"
+                             alt="{{ object.book.title_short }} book cover">
                     </div>
                 {% endif %}
             </div>
@@ -79,7 +79,7 @@
             <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 mx-auto btn-group" role="group">
                 <a type="button"
                    class="btn btn-primary"
-                   href="{% url 'renting:rental-delete' pk=object.rentals.pk %}">Return</a>
+                   href="{% url 'renting:rental-delete' pk=object.pk %}">Return</a>
             </div>
         </div>
     {% endif %}
