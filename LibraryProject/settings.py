@@ -37,9 +37,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_env_value('DEBUG') == 'True'
+DEBUG = get_env_value('DEBUG', default='False') == 'True'
 
-ALLOWED_HOSTS = get_env_value('ALLOWED_HOSTS')
+ALLOWED_HOSTS = get_env_value('ALLOWED_HOSTS', default='*')
 
 
 # Application definition
@@ -95,7 +95,8 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(default=get_env_value('DATABASE_URL'))}
+DATABASES = {'default': dj_database_url.config(default=get_env_value('DATABASE_URL',
+                                                                     default="postgres://postgres@localhost:5432/book"))}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
