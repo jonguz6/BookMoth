@@ -16,10 +16,12 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 
-def get_env_value(env_variable):
+def get_env_value(env_variable, default=None):
     try:
         return os.environ[env_variable]
     except KeyError:
+        if default is not None:
+            return default
         error_msg = f'Set the {env_variable} environment variable'
         raise ImproperlyConfigured(error_msg)
 
