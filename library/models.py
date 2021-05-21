@@ -2,10 +2,15 @@ import re
 import uuid
 
 from django.db import models
+from django.db.models import UniqueConstraint
 from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
 
 from renting.models import CurrentRental
+
+
+def upload_path(instance, filename):
+    return f'books/{filename}'
 
 
 class Book(models.Model):
@@ -14,7 +19,6 @@ class Book(models.Model):
         ('H', 'Hardcover'),
         ('E', 'E-Book')
     ]
-
     isbn_13 = models.CharField(max_length=13, verbose_name='ISBN')
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
@@ -22,7 +26,7 @@ class Book(models.Model):
     binding = models.CharField(max_length=2, choices=BINDING_CHOICES)
     publisher = models.CharField(max_length=50)
     published = models.DateField()
-    picture = models.ImageField(upload_to="books/")
+    picture = models.ImageField(upload_to=upload_path)
     list_price = models.FloatField()
 
     @property
@@ -40,6 +44,11 @@ class Book(models.Model):
     def __str__(self):
         return self.title_short
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['isbn_13'], name="Unique ISBN")
+        ]
+
 
 class BookInstance(models.Model):
     STATUS_CHOICES = [
@@ -50,7 +59,7 @@ class BookInstance(models.Model):
     ]
     unique_id = models.UUIDField(unique=True, default=uuid.uuid4)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT, related_name='instance')
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='m')
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='M')
 
     def __str__(self):
         return f'{self.book.title_short} - {self.unique_id}'
