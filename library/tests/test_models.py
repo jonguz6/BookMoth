@@ -69,3 +69,24 @@ class BookModelTestCase(TransactionTestCase):
     def test_str_method(self):
         self.assertEqual(self.book_one.__str__(), 'Test Book')
 
+
+@mock.patch(LibraryProject.settings.DEFAULT_FILE_STORAGE, FileSystemStorage)
+class BookInstanceTestCase(TransactionTestCase):
+    def setUp(self) -> None:
+        test_image = SimpleUploadedFile(
+            'test_image.jpg',
+            b'image')
+        self.book_one = Book.objects.create(
+            isbn_13='1234567890123',
+            title="Test Book: Edition Test",
+            author="Test Author",
+            edition="test",
+            binding="P",
+            publisher="Test Publisher",
+            published=datetime(year=2020, month=12, day=21),
+            picture=test_image,
+            list_price="19.95"
+        )
+        self.instance_one = BookInstance.objects.create(
+            book=self.book_one
+        )
