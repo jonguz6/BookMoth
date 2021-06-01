@@ -90,3 +90,6 @@ class BookInstanceTestCase(TransactionTestCase):
         self.instance_one = BookInstance.objects.create(
             book=self.book_one
         )
+
+    def test_instance_is_created(self):
+        self.assertEqual(BookInstance.objects.first(), self.instance_one)
