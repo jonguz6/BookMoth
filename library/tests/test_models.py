@@ -99,3 +99,10 @@ class BookInstanceTestCase(TransactionTestCase):
             unique_id=instance_uuid
         )
         self.assertEqual(instance_two.unique_id, instance_uuid)
+
+    def test_create_book_instance_with_custom_status(self):
+        instance_status = BookInstance.objects.create(
+            book=self.book_one,
+            status='A'
+        )
+        self.assertEqual(instance_status.status, 'A')
