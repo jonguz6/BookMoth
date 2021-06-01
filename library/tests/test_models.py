@@ -64,4 +64,8 @@ class BookModelTestCase(TransactionTestCase):
                           list_price="19.95")
 
     def test_instance_title_properties(self):
-        self.assertEqual(self.book_one.title_short, "Test Book")
+        self.assertEqual(self.book_one.title_short, 'Test Book')
+
+    def test_str_method(self):
+        self.assertEqual(self.book_one.__str__(), 'Test Book')
+
