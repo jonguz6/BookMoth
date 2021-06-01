@@ -91,3 +91,11 @@ class BookInstanceTestCase(TransactionTestCase):
 
     def test_instance_is_created(self):
         self.assertEqual(BookInstance.objects.first(), self.instance_one)
+
+    def test_create_book_instance_with_uuid(self):
+        instance_uuid = '3df246c8-4bcc-4cd0-9978-ab8b1f97766b'
+        instance_two = BookInstance.objects.create(
+            book=self.book_one,
+            unique_id=instance_uuid
+        )
+        self.assertEqual(instance_two.unique_id, instance_uuid)
