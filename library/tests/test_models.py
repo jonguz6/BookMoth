@@ -91,6 +91,7 @@ class BookInstanceTestCase(TransactionTestCase):
 
     def test_instance_is_created(self):
         self.assertEqual(BookInstance.objects.first(), self.instance_one)
+        self.assertEqual(self.book_one, self.instance_one.book)
 
     def test_create_book_instance_with_uuid(self):
         instance_uuid = '3df246c8-4bcc-4cd0-9978-ab8b1f97766b'
@@ -106,3 +107,35 @@ class BookInstanceTestCase(TransactionTestCase):
             status='A'
         )
         self.assertEqual(instance_status.status, 'A')
+
+    def test_property_is_available(self):
+        self.instance_one.status = 'M'
+        self.assertEqual(self.instance_one.is_available, False)
+        self.instance_one.status = 'A'
+        self.assertEqual(self.instance_one.is_available, True)
+
+    def test_property_is_loaned(self):
+        self.instance_one.status = 'A'
+        self.assertEqual(self.instance_one.is_loaned, False)
+        self.instance_one.status = 'L'
+        self.assertEqual(self.instance_one.is_loaned, True)
+
+    def test_rent_method(self):
+        self.instance_one.status = 'M'
+        result = self.instance_one.rent()
+        self.assertEqual(result[0], 'err')
+
+        self.instance_one.status = 'A'
+        result = self.instance_one.rent()
+        self.assertEqual(result[0], 'ok')
+        self.assertEqual(self.instance_one.status, 'L')
+
+    def test_rent_return_method(self):
+        self.instance_one.status = 'A'
+        result = self.instance_one.rent_return()
+        self.assertEqual(result[0], 'err')
+
+        self.instance_one.status = 'L'
+        result = self.instance_one.rent_return()
+        self.assertEqual(result[0], 'ok')
+
