@@ -11,24 +11,35 @@ import LibraryProject.settings
 from library.models import Book, BookInstance
 
 
+def create_book(isbn_13='1234567890123',
+                title='Test Book: Edition Test',
+                author='Test Author',
+                edition='test',
+                binding='P',
+                publisher='Test Publisher',
+                published=datetime(year=2020, month=12, day=21),
+                list_price=19.95):
+    test_image = SimpleUploadedFile(
+        'test_image.jpg',
+        b'image')
+    return Book.objects.create(
+        isbn_13=isbn_13,
+        title=title,
+        author=author,
+        edition=edition,
+        binding=binding,
+        publisher=publisher,
+        published=published,
+        picture=test_image,
+        list_price=list_price
+    )
+
+
 @mock.patch(LibraryProject.settings.DEFAULT_FILE_STORAGE, FileSystemStorage)
 class BookModelTestCase(TransactionTestCase):
 
     def setUp(self) -> None:
-        test_image = SimpleUploadedFile(
-            'test_image.jpg',
-            b'image')
-        self.book_one = Book.objects.create(
-            isbn_13='1234567890123',
-            title="Test Book: Edition Test",
-            author="Test Author",
-            edition="test",
-            binding="P",
-            publisher="Test Publisher",
-            published=datetime(year=2020, month=12, day=21),
-            picture=test_image,
-            list_price="19.95"
-        )
+        self.book_one = create_book()
 
     def test_book_is_created(self):
         book = Book.objects.first()
@@ -73,20 +84,7 @@ class BookModelTestCase(TransactionTestCase):
 @mock.patch(LibraryProject.settings.DEFAULT_FILE_STORAGE, FileSystemStorage)
 class BookInstanceTestCase(TransactionTestCase):
     def setUp(self) -> None:
-        test_image = SimpleUploadedFile(
-            'test_image.jpg',
-            b'image')
-        self.book_one = Book.objects.create(
-            isbn_13='1234567890123',
-            title="Test Book: Edition Test",
-            author="Test Author",
-            edition="test",
-            binding="P",
-            publisher="Test Publisher",
-            published=datetime(year=2020, month=12, day=21),
-            picture=test_image,
-            list_price="19.95"
-        )
+        self.book_one = create_book()
         self.instance_one = BookInstance.objects.create(
             book=self.book_one
         )
